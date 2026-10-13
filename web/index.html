@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>机场导航 - 机场测速与推荐</title>
+    <meta name="description" content="机场导航：公益、免费、白嫖、性价比、直连、中转、专线机场收录，含测速、套餐与联系方式。" />
+    <script>
+      (function () {
+        var m = localStorage.getItem('theme') || 'system'
+        var d = m === 'dark' || (m === 'system' && matchMedia('(prefers-color-scheme: dark)').matches)
+        if (d) document.documentElement.classList.add('dark')
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

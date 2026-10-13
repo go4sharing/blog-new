@@ -1,0 +1,45 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #ffffff;
+  --fg: #37352f;
+  --muted: #787774;
+  --line: #e9e9e7;
+  --hover: #f1f1ef;
+  --card: #ffffff;
+  --accent: #2383e2;
+}
+.dark {
+  --bg: #191919;
+  --fg: #ebebea;
+  --muted: #9b9b9b;
+  --line: #2f2f2f;
+  --hover: #252525;
+  --card: #202020;
+  --accent: #529cca;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-hover: var(--hover);
+  --color-card: var(--card);
+  --color-accent: var(--accent);
+}
+
+@layer base {
+  html { color-scheme: light; }
+  html.dark { color-scheme: dark; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  input, textarea, select { font: inherit; }
+}
