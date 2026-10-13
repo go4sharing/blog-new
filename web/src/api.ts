@@ -29,9 +29,16 @@ export async function fetchAirports(): Promise<Airport[]> {
 
 export function track(id: string, kind: HitKind) {
   if (!HAS_API) return
+  // 不用 sendBeacon：它固定携带凭据，跨域（前端在 GitHub Pages）时与 Access-Control-Allow-Origin: * 冲突，会被浏览器拦截。
+  // keepalive 的 fetch 同样能在页面跳转时发出；text/plain 属于“简单请求”，不触发预检，后端按 JSON 解析正文，与 Content-Type 无关。
   try {
-    const body = new Blob([JSON.stringify({ kind })], { type: 'application/json' })
-    navigator.sendBeacon(apiUrl(`/api/airports/${encodeURIComponent(id)}/hit`), body)
+    fetch(apiUrl(`/api/airports/${encodeURIComponent(id)}/hit`), {
+      method: 'POST',
+      body: JSON.stringify({ kind }),
+      headers: { 'Content-Type': 'text/plain' },
+      keepalive: true,
+      credentials: 'omit',
+    }).catch(() => {})
   } catch {
     /* ignore */
   }
